@@ -17,6 +17,11 @@ resource "helm_release" "aws-load-balancer-controller" {
   }
 
   set {
+    name = "replicaCount"
+    value = 1
+  }
+
+  set {
     name  = "serviceAccount.name"
     value = "aws-load-balancer-controller"
   }
@@ -33,7 +38,7 @@ resource "helm_release" "aws-load-balancer-controller" {
   }
 
   set {
-    name = "vpcId"
+    name  = "vpcId"
     value = aws_vpc.main.id
   }
 

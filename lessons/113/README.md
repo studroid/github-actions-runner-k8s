@@ -111,3 +111,9 @@ curl http://k8s-staging-phpapach-720344fc29-4d24ad27abc92c58.elb.us-east-1.amazo
 ## Storage
 
 Currently, Fargate does not support PersistentVolume back by EBS. You can use EFS instead.
+However, since the storage capacity is a required field by Kubernetes, you must specify the value and you can use any valid value for the capacity.
+
+When using standard EC2 worker nodes, the EFS CSI driver needs to be deployed as a set of pods and DaemonSets. With this new update, for Fargate this step is not required and you do not need to install the EFS CSI driver, as it is installed in the Fargate stack and support for EFS is provided out of the box. Customers can use EFS with Fargate for EKS without spending the time and resources to install and update the CSI driver.
+
+The current implementation of the EFS CSI driver requires the volumes to be statically pre-created for the PVC binding to work.
+Check your VPC configuration. If you are using a custom VPC, make sure that DNS settings are enabled.
