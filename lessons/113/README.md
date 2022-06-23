@@ -62,3 +62,52 @@ kubectl run -i --tty -n staging load-generator --pod-running-timeout=5m0s --rm -
 - create `k8s/pdb.yaml`
 kubectl apply -f k8s/pdb.yaml
 kubectl get pdb -n staging
+
+## OpenId conect
+
+- create `terraform/10-iam-oidc.tf`
+terraform init
+terraform apply
+
+## Deploy AWS Load balancer controller
+
+create `11-iam-controller.tf`
+create `AWSLoadBalancerController.json`
+create `12-helm-controller.tf`
+
+terraform apply
+create `k8s/ingress.yaml`
+
+kubectl logs -f -n kube-system \
+-l app.kubernetes.io/name=aws-load-balancer-controller
+
+kubectl apply -f k8s/ingress.yaml
+kubectl get ing -n staging
+create CNAME
+dig +short php-apache.devopsbyexample.io
+
+## Secure with TLS
+
+issue a certificate
+add
+```
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:424432388155:certificate/9c3c828c-5d42-4b0e-b7f9-64fcfecb8af9
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+```
+kubectl apply -f k8s/ingress.yaml
+check lb from the console
+check https://php-apache.devopsbyexample.io
+
+## Create network load balancer
+
+create k8s/lb.yaml
+kubectl apply -f k8s/lb.yaml
+kubectl get svc -n staging
+check in the console
+curl http://k8s-staging-phpapach-720344fc29-4d24ad27abc92c58.elb.us-east-1.amazonaws.com
+
+
+## Storage
+
+Currently, Fargate does not support PersistentVolume back by EBS. You can use EFS instead.
