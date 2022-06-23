@@ -117,3 +117,6 @@ When using standard EC2 worker nodes, the EFS CSI driver needs to be deployed as
 
 The current implementation of the EFS CSI driver requires the volumes to be statically pre-created for the PVC binding to work.
 Check your VPC configuration. If you are using a custom VPC, make sure that DNS settings are enabled.
+
+kubectl exec -n staging app -- stat /data
+
