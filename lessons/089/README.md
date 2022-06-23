@@ -29,7 +29,7 @@ terraform apply
 
 - Configure kubectl
 ```bash
-aws eks --region us-east-1 update-kubeconfig --name demo
+aws eks --region ap-northeast-2 update-kubeconfig --name demo
 ```
 if you get an error `'NoneType' object is not iterable`, run `rm ~/.kube/config`
 

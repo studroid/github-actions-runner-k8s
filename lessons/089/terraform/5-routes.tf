@@ -54,22 +54,22 @@ resource "aws_route_table" "public" {
 
 # Resource: aws_route_table_association
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
-resource "aws_route_table_association" "private-us-east-1a" {
-  subnet_id      = aws_subnet.private-us-east-1a.id
+resource "aws_route_table_association" "private-ap-northeast-2a" {
+  subnet_id      = aws_subnet.private-ap-northeast-2a.id
   route_table_id = aws_route_table.private.id
 }
 
-resource "aws_route_table_association" "private-us-east-1b" {
-  subnet_id      = aws_subnet.private-us-east-1b.id
+resource "aws_route_table_association" "private-ap-northeast-2b" {
+  subnet_id      = aws_subnet.private-ap-northeast-2b.id
   route_table_id = aws_route_table.private.id
 }
 
-resource "aws_route_table_association" "public-us-east-1a" {
-  subnet_id      = aws_subnet.public-us-east-1a.id
+resource "aws_route_table_association" "public-ap-northeast-2a" {
+  subnet_id      = aws_subnet.public-ap-northeast-2a.id
   route_table_id = aws_route_table.public.id
 }
 
-resource "aws_route_table_association" "public-us-east-1b" {
-  subnet_id      = aws_subnet.public-us-east-1b.id
+resource "aws_route_table_association" "public-ap-northeast-2b" {
+  subnet_id      = aws_subnet.public-ap-northeast-2b.id
   route_table_id = aws_route_table.public.id
 }
