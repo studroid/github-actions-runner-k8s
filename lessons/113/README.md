@@ -120,3 +120,12 @@ Check your VPC configuration. If you are using a custom VPC, make sure that DNS 
 
 kubectl exec -n staging app -- stat /data
 
+
+
+
+
+
+
+
+
+
